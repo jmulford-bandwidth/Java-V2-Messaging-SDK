@@ -1,0 +1,686 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Bandwidth V2 Messaging API",
+        "description": "Bandwidth's V2 Messaging API Guide",
+        "contact": {},
+        "version": "0.0.0"
+    },
+    "paths": {
+        "https://api.catapult.inetwork.com/v2/users/{userId}/messages": {
+            "post": {
+                "tags": [
+                    "Messages"
+                ],
+                "summary": "Send message",
+                "description": "Send a text message or picture message",
+                "operationId": "SendMessage",
+                "parameters": [{
+                    "name": "userId",
+                    "in": "path",
+                    "description": "User Id",
+                    "required": true,
+                    "style": "simple",
+                    "explode": false,
+                    "schema": {
+                        "type": "string"
+                    }
+                }],
+                "requestBody": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/V2SendMessageRequestBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "202": {
+                        "description": "Information about the message event",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Information about the message event",
+                                    "$ref": "#/components/schemas/V2SendMessageResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "https://dashboard.bandwidth.com/api/accounts/{account}/applications": {
+            "post": {
+                "tags": [
+                    "Applications"
+                ],
+                "summary": "Create application",
+                "description": "Create an application on your dashboard account",
+                "operationId": "CreateApplication",
+                "parameters": [{
+                    "name": "account",
+                    "in": "path",
+                    "description": "Account Id",
+                    "required": true,
+                    "style": "simple",
+                    "explode": false,
+                    "schema": {
+                        "type": "string"
+                    }
+                }],
+                "requestBody": {
+                    "description": "",
+                    "content": {
+                        "application/xml": {
+                            "schema": {
+                                "$ref": "#/components/schemas/V2CreateApplicationRequestBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Account created",
+                        "content": {
+                            "application/xml": {
+                                "schema": {
+                                    "description": "Account created",
+                                    "$ref": "#/components/schemas/V2CreateApplicationRepsponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Applications"
+                ],
+                "summary": "Get applications",
+                "description": "List all applications on your dashboard account",
+                "operationId": "GetApplications",
+                "parameters": [{
+                    "name": "account",
+                    "in": "path",
+                    "description": "Account Id",
+                    "required": true,
+                    "style": "simple",
+                    "explode": false,
+                    "schema": {
+                        "type": "string"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Applications information",
+                        "content": {
+                            "application/xml": {
+                                "schema": {
+                                    "description": "Applications information",
+                                    "$ref": "#/components/schemas/V2GetApplicationsResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "https://dashboard.bandwidth.com/api/accounts/{account}/applications/{applicationId}": {
+            "get": {
+                "tags": [
+                    "Applications"
+                ],
+                "summary": "Get application",
+                "description": "Get information about an existing application",
+                "operationId": "GetApplication",
+                "parameters": [{
+                        "name": "account",
+                        "in": "path",
+                        "description": "Account Id",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "applicationId",
+                        "in": "path",
+                        "description": "Application Id",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Application information",
+                        "content": {
+                            "application/xml": {
+                                "schema": {
+                                    "description": "Application information",
+                                    "$ref": "#/components/schemas/V2GetApplicationResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Applications"
+                ],
+                "summary": "Partial update application",
+                "description": "Partially updates an existing application",
+                "operationId": "PartialUpdateApplication",
+                "parameters": [{
+                        "name": "account",
+                        "in": "path",
+                        "description": "Account Id",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "applicationId",
+                        "in": "path",
+                        "description": "Application Id",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "",
+                    "content": {
+                        "application/xml": {
+                            "schema": {
+                                "$ref": "#/components/schemas/V2PartialUpdateApplicationRequestBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Application information",
+                        "content": {
+                            "application/xml": {
+                                "schema": {
+                                    "description": "Application information",
+                                    "$ref": "#/components/schemas/V2PartialUpdateApplicationResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Applications"
+                ],
+                "summary": "Complete update application",
+                "description": "Completely updates an existing application",
+                "operationId": "CompleteUpdateApplication",
+                "parameters": [{
+                        "name": "account",
+                        "in": "path",
+                        "description": "Account Id",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "applicationId",
+                        "in": "path",
+                        "description": "Application Id",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "",
+                    "content": {
+                        "application/xml": {
+                            "schema": {
+                                "$ref": "#/components/schemas/V2CompleteUpdateApplicationRequestBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Application information",
+                        "content": {
+                            "application/xml": {
+                                "schema": {
+                                    "description": "Application information",
+                                    "$ref": "#/components/schemas/V2CompleteUpdateApplicationResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Applications"
+                ],
+                "summary": "Delete application",
+                "description": "Deletes an existing application",
+                "operationId": "DeleteApplication",
+                "parameters": [{
+                        "name": "account",
+                        "in": "path",
+                        "description": "Account Id",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "applicationId",
+                        "in": "path",
+                        "description": "Application Id",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Application information",
+                        "content": {
+                            "application/xml": {
+                                "schema": {
+                                    "description": "Application information",
+                                    "$ref": "#/components/schemas/V2DeleteApplicationResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "https://dashboard.bandwidth.com/api/accounts/{account}/applications/{applicationId}/associatedsippeers": {
+            "get": {
+                "tags": [
+                    "Applications"
+                ],
+                "summary": "Get application sippers",
+                "description": "List all associated SipPeers (locations) for an application",
+                "operationId": "GetApplicationSipPeers",
+                "parameters": [{
+                        "name": "account",
+                        "in": "path",
+                        "description": "Account Id",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "applicationId",
+                        "in": "path",
+                        "description": "Application Id",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Application sippers information",
+                        "content": {
+                            "application/xml": {
+                                "schema": {
+                                    "description": "Application sippers information",
+                                    "$ref": "#/components/schemas/V2GetApplicationSipPeersResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ApplicationRequest": {
+                "title": "Application Request",
+                "type": "object",
+                "properties": {
+                    "ServiceType": {
+                        "type": "string",
+                        "description": "The type of service the application will be used for. \"Messaging-V2\" is the only valid service type as of February 15, 2018"
+                    },
+                    "AppName": {
+                        "type": "string",
+                        "description": "Plain text name of the application"
+                    },
+                    "CallbackUrl": {
+                        "type": "string",
+                        "description": "Url to receive all message events"
+                    },
+                    "CallbackCreds": {
+                        "description": "Basic auth credentials to apply to your message events",
+                        "$ref": "#/components/schemas/CallbackCreds"
+                    }
+                }
+            },
+            "ApplicationResponse": {
+                "title": "Application Response",
+                "type": "object",
+                "properties": {
+                    "ApplicationId": {
+                        "type": "string",
+                        "description": "Id of the application"
+                    },
+                    "ServiceType": {
+                        "type": "string",
+                        "description": "The type of service the application is used for. \"Messaging-V2\" is the only valid service type as of February 15, 2018"
+                    },
+                    "AppName": {
+                        "type": "string",
+                        "description": "Plain text name of the application"
+                    },
+                    "CallbackUrl": {
+                        "type": "string",
+                        "description": "Url to receive all message events"
+                    },
+                    "CallbackCreds": {
+                        "description": "Basic auth credentials to apply to your message events",
+                        "$ref": "#/components/schemas/CallbackCreds"
+                    }
+                }
+            },
+            "CallbackCreds": {
+                "title": "Callback Creds",
+                "type": "object",
+                "properties": {
+                    "UserId": {
+                        "type": "string",
+                        "description": "Basic auth UserId"
+                    },
+                    "Password": {
+                        "type": "string",
+                        "description": "Basic auth Password"
+                    }
+                }
+            },
+            "ApplicationRequestProvisioningResponse": {
+                "title": "Application Request Provisioning Response",
+                "type": "object",
+                "properties": {
+                    "ApplicationList": {
+                        "description": "List of ApplicationResponse objects",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ApplicationResponse"
+                        }
+                    },
+                    "Application": {
+                        "description": "A single ApplicationResponse if only 1 response was returned",
+                        "$ref": "#/components/schemas/ApplicationResponse"
+                    }
+                }
+            },
+            "AssociatedSipPeer": {
+                "title": "Associated Sip Peer",
+                "type": "object",
+                "properties": {
+                    "SiteId": {
+                        "type": "string",
+                        "description": "Id of the SIP site"
+                    },
+                    "SiteName": {
+                        "type": "string",
+                        "description": "Name of the SIP Site"
+                    },
+                    "PeerId": {
+                        "type": "string",
+                        "description": "Id of the Peer"
+                    },
+                    "PeerName": {
+                        "type": "string",
+                        "description": "Name of the Peer"
+                    }
+                }
+            },
+            "AssociatedSipPeersResponse": {
+                "title": "Associated Sip Peers Response",
+                "type": "object",
+                "properties": {
+                    "AssociatedSipPeers": {
+                        "description": "List of AssociatedSipPeer objects",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/AssociatedSipPeer"
+                         }
+                    }
+                }
+            },
+            "V2SendMessageRequestBody": {
+                "title": "V2 Send Message Request Body",
+                "type": "object",
+                "properties": {
+                    "from": {
+                        "type": "string",
+                        "description": "One of your telephone numbers the message should come from (must be in E.164 format, like +19195551212)"
+                    },
+                    "to": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "One or more phone numbers the message should be sent to (must be in E.164 format, like +19195551212)"
+                    },
+                    "text": {
+                        "type": "string",
+                        "description": "The contents of the text message (must be 2048 characters or less)"
+                    },
+                    "applicationId": {
+                        "type": "string",
+                        "description": "The ID of the Application your from number is associated with in the Bandwidth Phone Number Dashboard"
+                    },
+                    "media": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of URLs to include as media attachments as part of the message"
+                    },
+                    "tag": {
+                        "type": "string",
+                        "description": "An optional string supplied by the user which will be included in the callback events of the message"
+                    }
+                }
+            },
+            "V2SendMessageResponse": {
+                "title": "V2 Send Message Response",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "ID of the request"
+                    },
+                    "time": {
+                        "type": "string",
+                        "description": "Timestamp of the request (yyyy-mm-ddThh:mm:ssZ)"
+                    },
+                    "to": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "One or more phone numbers the message was sent to (must be in E.164 format, like +19195551212)"
+                    },
+                    "from": {
+                        "type": "string",
+                        "description": "One of your telephone numbers the message should come from (must be in E.164 format, like +19195551212)"
+                    },
+                    "text": {
+                        "type": "string",
+                        "description": "The contents of the text message (must be 2048 characters or less)"
+                    },
+                    "applicationId": {
+                        "type": "string",
+                        "description": "The ID of the Application your from number is associated with in the Bandwidth Phone Number Dashboard"
+                    },
+                    "tag": {
+                        "type": "string",
+                        "description": "The value of the tag from the request"
+                    },
+                    "media": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of URLs sent as media attachments as part of the message"
+                    },
+                    "direction": {
+                        "type": "string",
+                        "description": "The direction of the message. One of \"in\" or \"out\""
+                    },
+                    "segmentCount": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "The number of segments the message was sent as"
+                    }
+                }
+            },
+            "V2CreateApplicationRequestBody": {
+                "title": "V2 Create Application Request Body",
+                "type": "object",
+                "properties": {
+                    "Application": {
+                        "description": "Application Request Body",
+                        "$ref": "#/components/schemas/ApplicationRequest"
+                    }
+                }
+            },
+            "V2CreateApplicationRepsponse": {
+                "title": "V2 Create Application Response",
+                "type": "object",
+                "properties": {
+                    "ApplicationProvisioningResponse": {
+                        "description": "Application Provisioning Response",
+                        "$ref": "#/components/schemas/ApplicationRequestProvisioningResponse"
+                    }
+                }
+            },
+            "V2GetApplicationsResponse": {
+                "title": "V2 Get Applications Response",
+                "type": "object",
+                "properties": {
+                    "ApplicationProvisioningResponse": {
+                        "description": "Application Provisioning Response",
+                        "$ref": "#/components/schemas/ApplicationRequestProvisioningResponse"
+                    }
+                }
+            },
+            "V2GetApplicationResponse": {
+                "title": "V2 Get Application Response",
+                "type": "object",
+                "properties": {
+                    "ApplicationProvisioningResponse": {
+                        "description": "Application Provisioning Response",
+                        "$ref": "#/components/schemas/ApplicationRequestProvisioningResponse"
+                    }
+                }
+            },
+            "V2PartialUpdateApplicationRequestBody": {
+                "title": "V2 Partial Update Application Request Body",
+                "type": "object",
+                "properties": {
+                    "Application": {
+                        "description": "Application Request Body",
+                        "$ref": "#/components/schemas/ApplicationRequest"
+                    }
+                }
+            },
+            "V2PartialUpdateApplicationResponse": {
+                "title": "V2 Partial Update Application Response",
+                "type": "object",
+                "properties": {
+                    "ApplicationProvisioningResponse": {
+                        "description": "Application Provisioning Response",
+                        "$ref": "#/components/schemas/ApplicationRequestProvisioningResponse"
+                    }
+                }
+            },
+            "V2CompleteUpdateApplicationRequestBody": {
+                "title": "V2 Complete Update Application Request Body",
+                "type": "object",
+                "properties": {
+                    "Application": {
+                        "description": "Application Request Body",
+                        "$ref": "#/components/schemas/ApplicationRequest"
+                    }
+                }
+            },
+            "V2CompleteUpdateApplicationResponse": {
+                "title": "V2 Complete Update Application Response",
+                "type": "object",
+                "properties": {
+                    "ApplicationProvisioningResponse": {
+                        "description": "Application Provisioning Response",
+                        "$ref": "#/components/schemas/ApplicationRequestProvisioningResponse"
+                    }
+                }
+            },
+            "V2DeleteApplicationResponse": {
+                "title": "V2 Delete Application Response",
+                "type": "object",
+                "properties": {
+                    "Application": {
+                        "description": "Application Request Body",
+                        "$ref": "#/components/schemas/ApplicationRequest"
+                    }
+                }
+            },
+            "V2GetApplicationSipPeersResponse": {
+                "title": "V2 Get Application Sip Peers Response",
+                "type": "object",
+                "properties": {
+                    "AssociatedSipPeersResponse": {
+                        "description": "Application Sip Peers Response",
+                        "$ref": "#/components/schemas/AssociatedSipPeersResponse"
+                    }
+                }
+            }
+        }
+    }
+}
