@@ -1,3 +1,8 @@
+package com.bandwidth.V2.controllers;
+
+//Bandwidth V2 packages
+import com.bandwidth.V2.BandwidthClient;
+
 public class ApplicationController {
 
     protected static String BASE_URL = "https://dashboard.bandwidth.com/api/accounts/{account}/applications";
@@ -7,9 +12,10 @@ public class ApplicationController {
 
     public ApplicationController(final BandwidthClient client) {
         this.client = client;
-        this.url = BASE_URL.replace("{account}", client.account);
+        this.url = BASE_URL.replace("{account}", client.getAccount());
     }
 
+    /*
     public CreateApplicationResponse createApplication(CreateApplicationRequestBody requestBody) {
         
     }
@@ -37,5 +43,5 @@ public class ApplicationController {
     public GetApplicationSipPeersResponse getApplicationSipPeers(String applicationId) {
 
     }
-
+    */
 }
