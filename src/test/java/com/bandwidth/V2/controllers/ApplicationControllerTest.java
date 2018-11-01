@@ -41,7 +41,7 @@ public class ApplicationControllerTest {
         //Mock functions
         when(mockBandwidthClient.getAccount()).thenReturn(testAccount);
         when(mockBandwidthClient.makeRequestApplicationControllerPost(testUrl, testBody)).thenReturn(testResponse);
-        when(mockRequestBody.toJSON()).thenReturn(testBody);
+        when(mockRequestBody.toXML()).thenReturn(testBody);
 
         //Make response
         ApplicationController controller = new ApplicationController(mockBandwidthClient);
@@ -121,7 +121,7 @@ public class ApplicationControllerTest {
         //Mock functions
         when(mockBandwidthClient.getAccount()).thenReturn(testAccount);
         when(mockBandwidthClient.makeRequestApplicationControllerPatch(testUrl + "/" + testApplicationId, testBody)).thenReturn(testResponse);
-        when(mockRequestBody.toJSON()).thenReturn(testBody);
+        when(mockRequestBody.toXML()).thenReturn(testBody);
 
         //Make response
         ApplicationController controller = new ApplicationController(mockBandwidthClient);
@@ -150,7 +150,7 @@ public class ApplicationControllerTest {
         //Mock functions
         when(mockBandwidthClient.getAccount()).thenReturn(testAccount);
         when(mockBandwidthClient.makeRequestApplicationControllerPut(testUrl + "/" + testApplicationId, testBody)).thenReturn(testResponse);
-        when(mockRequestBody.toJSON()).thenReturn(testBody);
+        when(mockRequestBody.toXML()).thenReturn(testBody);
 
         //Make response
         ApplicationController controller = new ApplicationController(mockBandwidthClient);

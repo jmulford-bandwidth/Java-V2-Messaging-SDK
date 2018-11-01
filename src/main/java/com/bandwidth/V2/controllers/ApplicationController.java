@@ -38,7 +38,7 @@ public class ApplicationController {
      * @throws MalformedURLException MalformedURLException
      */
     public String createApplication(CreateApplicationRequestBody requestBody) throws IOException, MalformedURLException {
-        return this.client.makeRequestApplicationControllerPost(this.url, requestBody.toJSON());
+        return this.client.makeRequestApplicationControllerPost(this.url, requestBody.toXML());
     }
    
     /**
@@ -79,7 +79,7 @@ public class ApplicationController {
      * @throws MalformedURLException MalformedURLException
      */
     public String partialUpdateApplication(PartialUpdateApplicationRequestBody requestBody, String applicationId) throws IOException, MalformedURLException {
-        return this.client.makeRequestApplicationControllerPatch(this.url + "/" + applicationId, requestBody.toJSON());
+        return this.client.makeRequestApplicationControllerPatch(this.url + "/" + applicationId, requestBody.toXML());
     }
 
     /**
@@ -94,7 +94,7 @@ public class ApplicationController {
      * @throws MalformedURLException MalformedURLException
      */
     public String completeUpdateApplication(CompleteUpdateApplicationRequestBody requestBody, String applicationId) throws IOException, MalformedURLException {
-        return this.client.makeRequestApplicationControllerPut(this.url + "/" + applicationId, requestBody.toJSON());
+        return this.client.makeRequestApplicationControllerPut(this.url + "/" + applicationId, requestBody.toXML());
     }
 
     /**
