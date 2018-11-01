@@ -43,8 +43,6 @@ public class SendMessageRequestBodyTest {
         String json = requestBody.toJSON();
 
         //Check for correct value returned
-        System.out.println(json);
-        System.out.println(expectedJSON);
         assertTrue(json.equals(expectedJSON));
     }
 }

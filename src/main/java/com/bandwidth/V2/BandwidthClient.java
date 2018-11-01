@@ -94,27 +94,32 @@ public class BandwidthClient {
         this.account = account;
     }
 
+    public HttpClient getClient() {
+        return new DefaultHttpClient();
+    }
+
+    public HttpPost getHttpPost(String url) {
+        return new HttpPost(url);
+    }
+
     /**
      * Creates an HTTP POST request on a Bandwidth Messaging url
      *
-     * @param url The url to make the request on
      * @param body The JSON request body
+     * @param client HttpClient
+     * @param post HttpPost
      *
      * @return String response from the request
      *
      * @throws IOException IOException
      */
-    public String makeRequestMessageControllerPost(String url, String body) throws IOException {
+    public String makeRequestMessageControllerPost(String body, HttpClient client, HttpPost post) throws IOException {
         String header = "content-type: application/json";
         String user = this.apiToken + ":" + this.apiSecret;
-        String data = body;
-
-        HttpClient client = new DefaultHttpClient();
-        HttpPost post = new HttpPost(url);
 
         post.setHeader("header", header);
         post.setHeader("user", user);
-        post.setHeader("data", data);
+        post.setHeader("data", body);
 
         HttpResponse response = client.execute(post);
 

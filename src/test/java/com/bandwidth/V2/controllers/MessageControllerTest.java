@@ -5,6 +5,13 @@ import com.bandwidth.V2.controllers.MessageController;
 import com.bandwidth.V2.models.SendMessageRequestBody;
 import com.bandwidth.V2.BandwidthClient;
 
+//Packages for http requests
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 //Unit test packages
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
@@ -35,10 +42,14 @@ public class MessageControllerTest {
         //Create mock classes for SendMessageRequestBody and BandwidthClient
         SendMessageRequestBody requestBody = mock(SendMessageRequestBody.class);
         BandwidthClient client = mock(BandwidthClient.class);
+        HttpClient httpClient = mock(DefaultHttpClient.class);
+        HttpPost httpPost = mock(HttpPost.class);
 
         //Mock return values for functions
         when(client.getUserId()).thenReturn(testUserId);
-        when(client.makeRequestMessageControllerPost(fullUrl, testBody)).thenReturn(testResponse);
+        when(client.getClient()).thenReturn(httpClient);
+        when(client.getHttpPost(fullUrl)).thenReturn(httpPost);
+        when(client.makeRequestMessageControllerPost(testBody, httpClient, httpPost)).thenReturn(testResponse);
         when(requestBody.toJSON()).thenReturn(testBody);
 
         //Create MessageController and call sendMessage()
@@ -49,6 +60,6 @@ public class MessageControllerTest {
         assertTrue(response.equals(testResponse));
         verify(requestBody).toJSON();
         verify(client).getUserId();
-        verify(client).makeRequestMessageControllerPost(fullUrl, testBody);
+        verify(client).makeRequestMessageControllerPost(testBody, httpClient, httpPost);
     }
 }

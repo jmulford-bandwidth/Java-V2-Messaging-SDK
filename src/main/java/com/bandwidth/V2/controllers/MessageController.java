@@ -4,6 +4,13 @@ package com.bandwidth.V2.controllers;
 import com.bandwidth.V2.models.SendMessageRequestBody;
 import com.bandwidth.V2.BandwidthClient;
 
+//Packages for http requests
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 //Exceptions
 import java.net.MalformedURLException;
 import java.io.IOException;
@@ -42,6 +49,8 @@ public class MessageController {
     public String sendMessage(SendMessageRequestBody requestBody) throws MalformedURLException, IOException {
         String body = requestBody.toJSON();
         String fullUrl = this.url + SEND_MESSAGE_URL;
-        return this.client.makeRequestMessageControllerPost(fullUrl, body);
+        HttpClient client = this.client.getClient();
+        HttpPost post = this.client.getHttpPost(fullUrl);
+        return this.client.makeRequestMessageControllerPost(body, client, post);
     }
 }
