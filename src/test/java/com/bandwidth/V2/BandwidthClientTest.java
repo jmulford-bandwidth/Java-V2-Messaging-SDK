@@ -11,6 +11,9 @@ import org.apache.http.HttpEntity;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpPatch;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.impl.client.DefaultHttpClient;
 
@@ -67,5 +70,163 @@ public class BandwidthClientTest {
         verify(mockHttpPost).setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);
         verify(mockHttpPost).setEntity(mockStringEntity);
         verify(mockHttpClient).execute(mockHttpPost);
+    }
+
+    /**
+     * Test for makeRequestApplicationControllerGet()
+     */
+    @Test
+    public void testMakeRequestApplicationControllerGet() throws IOException, Exception {
+        //Test data
+        String testUsername = "123";
+        String testPassword = "456";
+
+        //Create mock objects
+        HttpClient mockHttpClient = mock(DefaultHttpClient.class);
+        HttpGet mockHttpGet = mock(HttpGet.class);
+        CloseableHttpResponse mockCloseableHttpResponse = mock(CloseableHttpResponse.class);
+        StringEntity mockStringEntity = mock(StringEntity.class);
+
+        //Mock return values of mock objects
+        when(mockHttpClient.execute(mockHttpGet)).thenReturn(mockCloseableHttpResponse);
+
+        //Create BandwidthClient object
+        BandwidthClient client = new BandwidthClient(null, null, null, testUsername, testPassword, null);
+
+        //Get response
+        HttpResponse response = client.makeRequestApplicationControllerGet(mockHttpClient, mockHttpGet);
+
+        //Validate function calls
+        verify(mockHttpGet).setHeader("Content-type", "application/xml");
+        String encoding = Base64.getEncoder().encodeToString((testUsername + ":" + testPassword).getBytes("UTF-8"));
+        verify(mockHttpGet).setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);
+        verify(mockHttpClient).execute(mockHttpGet);
+    }
+
+    /**
+     * Test for makeRequestApplicationControllerDelete()
+     */
+    @Test
+    public void testMakeRequestApplicationControllerDelete() throws IOException, Exception {
+        //Test data
+        String testUsername = "123";
+        String testPassword = "456";
+
+        //Create mock objects
+        HttpClient mockHttpClient = mock(DefaultHttpClient.class);
+        HttpDelete mockHttpDelete = mock(HttpDelete.class);
+        CloseableHttpResponse mockCloseableHttpResponse = mock(CloseableHttpResponse.class);
+        StringEntity mockStringEntity = mock(StringEntity.class);
+
+        //Mock return values of mock objects
+        when(mockHttpClient.execute(mockHttpDelete)).thenReturn(mockCloseableHttpResponse);
+
+        //Create BandwidthClient object
+        BandwidthClient client = new BandwidthClient(null, null, null, testUsername, testPassword, null);
+
+        //Delete response
+        HttpResponse response = client.makeRequestApplicationControllerDelete(mockHttpClient, mockHttpDelete);
+
+        //Validate function calls
+        verify(mockHttpDelete).setHeader("Content-type", "application/xml");
+        String encoding = Base64.getEncoder().encodeToString((testUsername + ":" + testPassword).getBytes("UTF-8"));
+        verify(mockHttpDelete).setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);
+        verify(mockHttpClient).execute(mockHttpDelete);
+    }
+
+    /**
+     * Test for proper functionality of makeRequestApplicationeControllerPost()
+     */
+    @Test
+    public void testMakeRequestApplicationControllerPost() throws IOException, Exception {
+        //Test data
+        String testUsername = "123";
+        String testPassword = "456";
+
+        //Create mock objects
+        HttpClient mockHttpClient = mock(DefaultHttpClient.class);
+        HttpPost mockHttpPost = mock(HttpPost.class);
+        CloseableHttpResponse mockCloseableHttpResponse = mock(CloseableHttpResponse.class);
+        StringEntity mockStringEntity = mock(StringEntity.class);
+
+        //Mock return values of mock objects
+        when(mockHttpClient.execute(mockHttpPost)).thenReturn(mockCloseableHttpResponse);
+
+        //Create BandwidthClient object
+        BandwidthClient client = new BandwidthClient(null, null, null, testUsername, testPassword, null);
+
+        //Get response
+        HttpResponse response = client.makeRequestApplicationControllerPost(mockStringEntity, mockHttpClient, mockHttpPost);
+
+        //Validate function calls
+        verify(mockHttpPost).setHeader("Content-type", "application/xml");
+        String encoding = Base64.getEncoder().encodeToString((testUsername + ":" + testPassword).getBytes("UTF-8"));
+        verify(mockHttpPost).setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);
+        verify(mockHttpPost).setEntity(mockStringEntity);
+        verify(mockHttpClient).execute(mockHttpPost);
+    }
+
+    /**
+     * Test for proper functionality of makeRequestApplicationeControllerPut()
+     */
+    @Test
+    public void testMakeRequestApplicationControllerPut() throws IOException, Exception {
+        //Test data
+        String testUsername = "123";
+        String testPassword = "456";
+
+        //Create mock objects
+        HttpClient mockHttpClient = mock(DefaultHttpClient.class);
+        HttpPut mockHttpPut = mock(HttpPut.class);
+        CloseableHttpResponse mockCloseableHttpResponse = mock(CloseableHttpResponse.class);
+        StringEntity mockStringEntity = mock(StringEntity.class);
+
+        //Mock return values of mock objects
+        when(mockHttpClient.execute(mockHttpPut)).thenReturn(mockCloseableHttpResponse);
+
+        //Create BandwidthClient object
+        BandwidthClient client = new BandwidthClient(null, null, null, testUsername, testPassword, null);
+
+        //Get response
+        HttpResponse response = client.makeRequestApplicationControllerPut(mockStringEntity, mockHttpClient, mockHttpPut);
+
+        //Validate function calls
+        verify(mockHttpPut).setHeader("Content-type", "application/xml");
+        String encoding = Base64.getEncoder().encodeToString((testUsername + ":" + testPassword).getBytes("UTF-8"));
+        verify(mockHttpPut).setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);
+        verify(mockHttpPut).setEntity(mockStringEntity);
+        verify(mockHttpClient).execute(mockHttpPut);
+    }
+
+    /**
+     * Test for proper functionality of makeRequestApplicationeControllerPatch()
+     */
+    @Test
+    public void testMakeRequestApplicationControllerPatch() throws IOException, Exception {
+        //Test data
+        String testUsername = "123";
+        String testPassword = "456";
+
+        //Create mock objects
+        HttpClient mockHttpClient = mock(DefaultHttpClient.class);
+        HttpPatch mockHttpPatch = mock(HttpPatch.class);
+        CloseableHttpResponse mockCloseableHttpResponse = mock(CloseableHttpResponse.class);
+        StringEntity mockStringEntity = mock(StringEntity.class);
+
+        //Mock return values of mock objects
+        when(mockHttpClient.execute(mockHttpPatch)).thenReturn(mockCloseableHttpResponse);
+
+        //Create BandwidthClient object
+        BandwidthClient client = new BandwidthClient(null, null, null, testUsername, testPassword, null);
+
+        //Get response
+        HttpResponse response = client.makeRequestApplicationControllerPatch(mockStringEntity, mockHttpClient, mockHttpPatch);
+
+        //Validate function calls
+        verify(mockHttpPatch).setHeader("Content-type", "application/xml");
+        String encoding = Base64.getEncoder().encodeToString((testUsername + ":" + testPassword).getBytes("UTF-8"));
+        verify(mockHttpPatch).setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);
+        verify(mockHttpPatch).setEntity(mockStringEntity);
+        verify(mockHttpClient).execute(mockHttpPatch);
     }
 }
