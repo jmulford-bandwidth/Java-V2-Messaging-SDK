@@ -37,9 +37,26 @@ public class SendMessageRequestBodyTest {
         media.add(mediaAdd);
         String tag = "987";
 
-        String expectedJSON = "{\"from\":\"123\",\"to\":[\"456\"],\"text\":\"789\",\"applicationId\":\"321\",\"media\":[\"654\"],\"tag\":\"987\"}";
+        String expectedJSON = "{\"to\":[\"456\"],\"from\":\"123\",\"text\":\"789\",\"applicationId\":\"321\",\"media\":[\"654\"],\"tag\":\"987\"}";
+
         //Create SendMessageRequestBody and call toJSON()
-        SendMessageRequestBody requestBody = new SendMessageRequestBody(from, to, text, applicationId, media, tag);
+        SendMessageRequestBody requestBody = new SendMessageRequestBody(to, from, text, applicationId, media, tag);
+        String json = requestBody.toJSON();
+
+        //Check for correct value returned
+        assertTrue(json.equals(expectedJSON));
+    }
+
+    /**
+     * Test for exclusion of null values in toJSON()
+     */
+    @Test
+    public void testToJSONNullValues() throws JsonProcessingException {
+        //Test variables
+        String expectedJSON = "{}";
+
+        //Create SendMessageRequestBody and call toJSON()
+        SendMessageRequestBody requestBody = new SendMessageRequestBody(null, null, null, null, null, null);
         String json = requestBody.toJSON();
 
         //Check for correct value returned

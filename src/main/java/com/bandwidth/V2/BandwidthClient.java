@@ -3,16 +3,22 @@ package com.bandwidth.V2;
 //Java IO packages
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 
 //Exceptions
 import java.io.IOException;
 
 //Packages for http requests
+import org.apache.http.entity.StringEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpHeaders;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+
+//Java packages
+import java.util.Base64;
 
 
 /**
@@ -98,31 +104,29 @@ public class BandwidthClient {
         return new DefaultHttpClient();
     }
 
+    public StringEntity getStringEntity(String body) throws UnsupportedEncodingException {
+        return new StringEntity(body);
+    }
+
     public HttpPost getHttpPost(String url) {
         return new HttpPost(url);
     }
 
+    public HttpGet getHttpGet(String url) {
+        return new HttpGet(url);
+    }
+
+    
     /**
-     * Creates an HTTP POST request on a Bandwidth Messaging url
+     * Parses an http response
      *
-     * @param body The JSON request body
-     * @param client HttpClient
-     * @param post HttpPost
+     * @param response Http response
      *
-     * @return String response from the request
+     * @return String parsed response
      *
      * @throws IOException IOException
      */
-    public String makeRequestMessageControllerPost(String body, HttpClient client, HttpPost post) throws IOException {
-        String header = "content-type: application/json";
-        String user = this.apiToken + ":" + this.apiSecret;
-
-        post.setHeader("header", header);
-        post.setHeader("user", user);
-        post.setHeader("data", body);
-
-        HttpResponse response = client.execute(post);
-
+    public String parseResponse(HttpResponse response) throws IOException {
 		BufferedReader rd = new BufferedReader(
                         new InputStreamReader(response.getEntity().getContent()));
 
@@ -135,9 +139,31 @@ public class BandwidthClient {
 		return result.toString();
     }
 
+    /**
+     * Creates an HTTP POST request on a Bandwidth Messaging url
+     *
+     * @param entity StringEntity of the JSON request body
+     * @param client HttpClient
+     * @param post HttpPost
+     *
+     * @return HttpResponse response from the request
+     *
+     * @throws IOException IOException
+     */
+    public HttpResponse makeRequestMessageControllerPost(StringEntity entity, HttpClient client, HttpPost post) throws IOException {
+        String encoding = Base64.getEncoder().encodeToString((this.apiToken + ":" + this.apiSecret).getBytes("UTF-8"));
+
+        post.setHeader("Content-type", "application/json");
+        post.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);
+        post.setEntity(entity);
+
+        return client.execute(post);
+    }
+
     public String makeRequestApplicationControllerGet(String url) {
         return "";
     }
+
     public String makeRequestApplicationControllerPost(String url, String body) {
         return "";
     }

@@ -36,4 +36,17 @@ public class CreateApplicationRequestBodyTest {
         //Check for correct value returned
         assertTrue(xml.equals(expectedXML));
     }
+
+    /**
+     * Test that null values are not included in the return of toXML()
+     */
+    @Test
+    public void testToXMLNullValues() {
+        String expectedXML = "<Application></Application>";
+
+        CreateApplicationRequestBody requestBody = new CreateApplicationRequestBody(null, null, null, null, null);
+        String xml = requestBody.toXML();
+
+        assertTrue(xml.equals(expectedXML));
+    }
 }
