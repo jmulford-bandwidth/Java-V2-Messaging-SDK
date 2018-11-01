@@ -72,7 +72,11 @@ public class ApplicationController {
      * @throws MalformedURLException MalformedURLException
      */
     public String getApplications() throws IOException, MalformedURLException {
-        return this.client.makeRequestApplicationControllerGet(this.url);
+        String fullUrl = this.url;
+        HttpClient client = this.client.getClient();
+        HttpGet get = this.client.getHttpGet(fullUrl);
+        HttpResponse response = this.client.makeRequestApplicationControllerGet(client, get);
+        return this.client.parseResponse(response);
     }
 
     /**
@@ -86,7 +90,11 @@ public class ApplicationController {
      * @throws MalformedURLException MalformedURLException
      */
     public String getApplication(String applicationId) throws IOException, MalformedURLException {
-        return this.client.makeRequestApplicationControllerGet(this.url + "/" + applicationId);
+        String fullUrl = this.url + "/" + applicationId;
+        HttpClient client = this.client.getClient();
+        HttpGet get = this.client.getHttpGet(fullUrl);
+        HttpResponse response = this.client.makeRequestApplicationControllerGet(client, get);
+        return this.client.parseResponse(response);
     }
 
     /**
@@ -142,7 +150,11 @@ public class ApplicationController {
      * @throws MalformedURLException MalformedURLException
      */
     public String deleteApplication(String applicationId) throws IOException, MalformedURLException {
-        return this.client.makeRequestApplicationControllerDelete(this.url + "/" + applicationId);
+        String fullUrl = this.url + "/" + applicationId;
+        HttpClient client = this.client.getClient();
+        HttpDelete delete = this.client.getHttpDelete(fullUrl);
+        HttpResponse response = this.client.makeRequestApplicationControllerDelete(client, delete);
+        return this.client.parseResponse(response);
     }
 
     /**
@@ -156,6 +168,10 @@ public class ApplicationController {
      * @throws MalformedURLException MalformedURLException
      */
     public String getApplicationSipPeers(String applicationId) throws IOException, MalformedURLException {
-        return this.client.makeRequestApplicationControllerGet(this.url + "/" + applicationId + "/associatedsippeers");
+        String fullUrl = this.url + "/" + applicationId + "/associatedsippers";
+        HttpClient client = this.client.getClient();
+        HttpGet get = this.client.getHttpGet(fullUrl);
+        HttpResponse response = this.client.makeRequestApplicationControllerGet(client, get);
+        return this.client.parseResponse(response);
     }
 }

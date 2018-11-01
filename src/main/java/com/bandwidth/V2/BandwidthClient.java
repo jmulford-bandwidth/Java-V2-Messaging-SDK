@@ -174,11 +174,38 @@ public class BandwidthClient {
         return client.execute(post);
     }
 
-    public String makeRequestApplicationControllerGet(String url) {
-        return "";
+    /**
+     * Creates an HTTP Get request on a Bandwidth Application url
+     *
+     * @param client HttpClient
+     * @param get HttpGet
+     *
+     * @throws IOException IOException
+     */
+    public HttpResponse makeRequestApplicationControllerGet(HttpClient client, HttpGet get) throws IOException {
+        String encoding = Base64.getEncoder().encodeToString((this.username + ":" + this.password).getBytes("UTF-8"));
+
+        get.setHeader("Content-type", "application/xml");
+        get.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);
+
+        return client.execute(get);
     }
-    public String makeRequestApplicationControllerDelete(String url) {
-        return "";
+
+    /**
+     * Creates an HTTP Delete request on a Bandwidth Application url
+     *
+     * @param client HttpClient
+     * @param delete HttpDelete
+     *
+     * @throws IOException IOException
+     */
+    public HttpResponse makeRequestApplicationControllerDelete(HttpClient client, HttpDelete delete) throws IOException {
+        String encoding = Base64.getEncoder().encodeToString((this.username + ":" + this.password).getBytes("UTF-8"));
+
+        delete.setHeader("Content-type", "application/xml");
+        delete.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);
+
+        return client.execute(delete);
     }
 
     /**

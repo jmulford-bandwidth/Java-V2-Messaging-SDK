@@ -83,10 +83,16 @@ public class ApplicationControllerTest {
 
         //Mock classes
         BandwidthClient mockBandwidthClient = mock(BandwidthClient.class);
+        HttpClient mockHttpClient = mock(DefaultHttpClient.class);
+        HttpGet mockHttpGet = mock(HttpGet.class);
+        HttpResponse mockHttpResponse = mock(HttpResponse.class);
 
         //Mock functions
         when(mockBandwidthClient.getAccount()).thenReturn(testAccount);
-        when(mockBandwidthClient.makeRequestApplicationControllerGet(testUrl)).thenReturn(testResponse);
+        when(mockBandwidthClient.getClient()).thenReturn(mockHttpClient);
+        when(mockBandwidthClient.getHttpGet(testUrl)).thenReturn(mockHttpGet);
+        when(mockBandwidthClient.makeRequestApplicationControllerGet(mockHttpClient, mockHttpGet)).thenReturn(mockHttpResponse);
+        when(mockBandwidthClient.parseResponse(mockHttpResponse)).thenReturn(testResponse);
 
         //Make response
         ApplicationController controller = new ApplicationController(mockBandwidthClient);
@@ -105,14 +111,20 @@ public class ApplicationControllerTest {
         String testAccount = "12345";
         String testResponse = "67890";
         String testApplicationId = "321";
-        String testUrl = ApplicationController.BASE_URL.replace("{account}", testAccount);
+        String testUrl = ApplicationController.BASE_URL.replace("{account}", testAccount) + "/" + testApplicationId;
 
         //Mock classes
         BandwidthClient mockBandwidthClient = mock(BandwidthClient.class);
+        HttpClient mockHttpClient = mock(DefaultHttpClient.class);
+        HttpGet mockHttpGet = mock(HttpGet.class);
+        HttpResponse mockHttpResponse = mock(HttpResponse.class);
 
         //Mock functions
         when(mockBandwidthClient.getAccount()).thenReturn(testAccount);
-        when(mockBandwidthClient.makeRequestApplicationControllerGet(testUrl + "/" + testApplicationId)).thenReturn(testResponse);
+        when(mockBandwidthClient.getClient()).thenReturn(mockHttpClient);
+        when(mockBandwidthClient.getHttpGet(testUrl)).thenReturn(mockHttpGet);
+        when(mockBandwidthClient.makeRequestApplicationControllerGet(mockHttpClient, mockHttpGet)).thenReturn(mockHttpResponse);
+        when(mockBandwidthClient.parseResponse(mockHttpResponse)).thenReturn(testResponse);
 
         //Make response
         ApplicationController controller = new ApplicationController(mockBandwidthClient);
@@ -205,14 +217,20 @@ public class ApplicationControllerTest {
         String testAccount = "12345";
         String testResponse = "67890";
         String testApplicationId = "321";
-        String testUrl = ApplicationController.BASE_URL.replace("{account}", testAccount);
+        String testUrl = ApplicationController.BASE_URL.replace("{account}", testAccount) + "/" + testApplicationId;
 
         //Mock classes
         BandwidthClient mockBandwidthClient = mock(BandwidthClient.class);
+        HttpClient mockHttpClient = mock(DefaultHttpClient.class);
+        HttpDelete mockHttpDelete = mock(HttpDelete.class);
+        HttpResponse mockHttpResponse = mock(HttpResponse.class);
 
         //Mock functions
         when(mockBandwidthClient.getAccount()).thenReturn(testAccount);
-        when(mockBandwidthClient.makeRequestApplicationControllerDelete(testUrl + "/" + testApplicationId)).thenReturn(testResponse);
+        when(mockBandwidthClient.getClient()).thenReturn(mockHttpClient);
+        when(mockBandwidthClient.getHttpDelete(testUrl)).thenReturn(mockHttpDelete);
+        when(mockBandwidthClient.makeRequestApplicationControllerDelete(mockHttpClient, mockHttpDelete)).thenReturn(mockHttpResponse);
+        when(mockBandwidthClient.parseResponse(mockHttpResponse)).thenReturn(testResponse);
 
         //Make response
         ApplicationController controller = new ApplicationController(mockBandwidthClient);
@@ -231,14 +249,20 @@ public class ApplicationControllerTest {
         String testAccount = "12345";
         String testResponse = "67890";
         String testApplicationId = "321";
-        String testUrl = ApplicationController.BASE_URL.replace("{account}", testAccount);
+        String testUrl = ApplicationController.BASE_URL.replace("{account}", testAccount) + "/" + testApplicationId + "/associatedsippers";
 
         //Mock classes
         BandwidthClient mockBandwidthClient = mock(BandwidthClient.class);
+        HttpClient mockHttpClient = mock(DefaultHttpClient.class);
+        HttpGet mockHttpGet = mock(HttpGet.class);
+        HttpResponse mockHttpResponse = mock(HttpResponse.class);
 
         //Mock functions
         when(mockBandwidthClient.getAccount()).thenReturn(testAccount);
-        when(mockBandwidthClient.makeRequestApplicationControllerGet(testUrl + "/" + testApplicationId + "/associatedsippeers")).thenReturn(testResponse);
+        when(mockBandwidthClient.getClient()).thenReturn(mockHttpClient);
+        when(mockBandwidthClient.getHttpGet(testUrl)).thenReturn(mockHttpGet);
+        when(mockBandwidthClient.makeRequestApplicationControllerGet(mockHttpClient, mockHttpGet)).thenReturn(mockHttpResponse);
+        when(mockBandwidthClient.parseResponse(mockHttpResponse)).thenReturn(testResponse);
 
         //Make response
         ApplicationController controller = new ApplicationController(mockBandwidthClient);
