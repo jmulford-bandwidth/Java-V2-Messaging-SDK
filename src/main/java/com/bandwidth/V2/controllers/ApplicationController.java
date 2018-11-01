@@ -2,6 +2,13 @@ package com.bandwidth.V2.controllers;
 
 //Bandwidth V2 packages
 import com.bandwidth.V2.BandwidthClient;
+import com.bandwidth.V2.models.CreateApplicationRequestBody;
+import com.bandwidth.V2.models.PartialUpdateApplicationRequestBody;
+import com.bandwidth.V2.models.CompleteUpdateApplicationRequestBody;
+
+//Exceptions
+import java.net.MalformedURLException;
+import java.io.IOException;
 
 public class ApplicationController {
 
@@ -10,38 +17,111 @@ public class ApplicationController {
     private BandwidthClient client;
     private String url;
 
-    public ApplicationController(final BandwidthClient client) {
+    /**
+     * Constructor for ApplicationController
+     *
+     * @param client The BandwidthClient object to make requests
+     */
+    public ApplicationController(BandwidthClient client) {
         this.client = client;
         this.url = BASE_URL.replace("{account}", client.getAccount());
     }
 
-    /*
-    public CreateApplicationResponse createApplication(CreateApplicationRequestBody requestBody) {
-        
+    /**
+     * Creates a new application
+     *
+     * @param requestBody The CreateApplicationRequestBody object representing the request body parameters
+     *
+     * @return String: The response of the request
+     *
+     * @throws IOException IOException
+     * @throws MalformedURLException MalformedURLException
+     */
+    public String createApplication(CreateApplicationRequestBody requestBody) throws IOException, MalformedURLException {
+        return this.client.makeRequestApplicationControllerPost(this.url, requestBody.toXML());
     }
-    
-    public GetApplicationsResponse getApplications() {
-        
+   
+    /**
+     * Gets all applications
+     *
+     * @return String: The response of the request
+     *
+     * @throws IOException IOException
+     * @throws MalformedURLException MalformedURLException
+     */
+    public String getApplications() throws IOException, MalformedURLException {
+        return this.client.makeRequestApplicationControllerGet(this.url);
     }
 
-    public GetApplicationResponse getApplication(String applicationId) {
-        
+    /**
+     * Gets 1 application
+     *
+     * @param applicationId The ID of the application to retrieve
+     *
+     * @return String: The response of the request
+     *
+     * @throws IOException IOException
+     * @throws MalformedURLException MalformedURLException
+     */
+    public String getApplication(String applicationId) throws IOException, MalformedURLException {
+        return this.client.makeRequestApplicationControllerGet(this.url + "/" + applicationId);
     }
 
-    public PartialUpdateApplicationResponse partialUpdateApplication(PartialUpdateApplicationRequestBody requestBody, String applicationId) {
-        
+    /**
+     * Partially updates 1 application
+     *
+     * @param requestBody The requestBody of the request
+     * @param applicationId The application to update
+     *
+     * @return String: The response of the request
+     *
+     * @throws IOException IOException
+     * @throws MalformedURLException MalformedURLException
+     */
+    public String partialUpdateApplication(PartialUpdateApplicationRequestBody requestBody, String applicationId) throws IOException, MalformedURLException {
+        return this.client.makeRequestApplicationControllerPatch(this.url + "/" + applicationId, requestBody.toXML());
     }
 
-    public CompleteUpdateApplicationResponse completeUpdateApplication(CompleteUpdateApplicationRequestBody requestBody, String applicationId) {
-        
+    /**
+     * Completely updates 1 application
+     *
+     * @param requestBody The requestBody of the request
+     * @param applicationId The application to update
+     *
+     * @return String: The response of the request
+     *
+     * @throws IOException IOException
+     * @throws MalformedURLException MalformedURLException
+     */
+    public String completeUpdateApplication(CompleteUpdateApplicationRequestBody requestBody, String applicationId) throws IOException, MalformedURLException {
+        return this.client.makeRequestApplicationControllerPut(this.url + "/" + applicationId, requestBody.toXML());
     }
 
-    public DeleteApplicationResponse deleteApplication(String applicationId) {
-        
+    /**
+     * Deletes 1 application
+     *
+     * @param applicationId The ID of the application to delete
+     *
+     * @return String: The response of the request
+     *
+     * @throws IOException IOException
+     * @throws MalformedURLException MalformedURLException
+     */
+    public String deleteApplication(String applicationId) throws IOException, MalformedURLException {
+        return this.client.makeRequestApplicationControllerDelete(this.url + "/" + applicationId);
     }
 
-    public GetApplicationSipPeersResponse getApplicationSipPeers(String applicationId) {
-
+    /**
+     * Get all associated SipPeers (locations) for an application
+     *
+     * @param applicationId The ID of the application to get SipPeers from
+     *
+     * @return String: The response of the request
+     *
+     * @throws IOException IOException
+     * @throws MalformedURLException MalformedURLException
+     */
+    public String getApplicationSipPeers(String applicationId) throws IOException, MalformedURLException {
+        return this.client.makeRequestApplicationControllerGet(this.url + "/" + applicationId + "/associatedsippeers");
     }
-    */
 }
