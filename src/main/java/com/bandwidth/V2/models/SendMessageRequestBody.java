@@ -3,6 +3,8 @@ package com.bandwidth.V2.models;
 //Package for converting class to JSON
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 //Java packages
 import java.util.ArrayList;
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 /**
  * Wrapper class for holding request parameters for MessageController.SendMessage()
  */
+@JsonInclude(Include.NON_NULL)
 public class SendMessageRequestBody {
 
     public String from;
@@ -47,6 +50,14 @@ public class SendMessageRequestBody {
      */
     public String toJSON() throws JsonProcessingException {
         ObjectMapper om = new ObjectMapper();
+        /*String json = "{";
+
+        if (this.from != null && this.from.length() > 0) {
+            json += "
+        }
+
+        json += "}";
+        return json;*/
         return om.writeValueAsString(this);
     }
 }
