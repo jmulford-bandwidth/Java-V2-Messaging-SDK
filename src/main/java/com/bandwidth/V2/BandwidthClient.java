@@ -181,6 +181,8 @@ public class BandwidthClient {
      * @param get HttpGet
      *
      * @throws IOException IOException
+     * 
+     * @return HttpResponse
      */
     public HttpResponse makeRequestApplicationControllerGet(HttpClient client, HttpGet get) throws IOException {
         String encoding = Base64.getEncoder().encodeToString((this.username + ":" + this.password).getBytes("UTF-8"));
@@ -198,6 +200,8 @@ public class BandwidthClient {
      * @param delete HttpDelete
      *
      * @throws IOException IOException
+     * 
+     * @return HttpResponse
      */
     public HttpResponse makeRequestApplicationControllerDelete(HttpClient client, HttpDelete delete) throws IOException {
         String encoding = Base64.getEncoder().encodeToString((this.username + ":" + this.password).getBytes("UTF-8"));
@@ -214,6 +218,10 @@ public class BandwidthClient {
      * @param entity StringEntity of the XML request body
      * @param client HttpClient
      * @param post HttpPost
+     *
+     * @throws IOException IOException
+     * 
+     * @return HttpResponse
      */
     public HttpResponse makeRequestApplicationControllerPost(StringEntity entity, HttpClient client, HttpPost post) throws IOException {
         String encoding = Base64.getEncoder().encodeToString((this.username + ":" + this.password).getBytes("UTF-8"));
@@ -231,6 +239,10 @@ public class BandwidthClient {
      * @param entity StringEntity of the XML request body
      * @param client HttpClient
      * @param patch HttpPatch
+     *
+     * @throws IOException IOException
+     * 
+     * @return HttpResponse
      */
     public HttpResponse makeRequestApplicationControllerPatch(StringEntity entity, HttpClient client, HttpPatch patch) throws IOException {
         String encoding = Base64.getEncoder().encodeToString((this.username + ":" + this.password).getBytes("UTF-8"));
@@ -248,6 +260,10 @@ public class BandwidthClient {
      * @param entity StringEntity of the XML request body
      * @param client HttpClient
      * @param put HttpPut
+     *
+     * @throws IOException IOException
+     * 
+     * @return HttpResponse
      */
     public HttpResponse makeRequestApplicationControllerPut(StringEntity entity, HttpClient client, HttpPut put) throws IOException {
         String encoding = Base64.getEncoder().encodeToString((this.username + ":" + this.password).getBytes("UTF-8"));
