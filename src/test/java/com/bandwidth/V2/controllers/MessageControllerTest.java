@@ -66,9 +66,5 @@ public class MessageControllerTest {
 
         //Check for proper response, and that the correct functions were called with the correct parameters
         assertTrue(response.equals(testResponse));
-        //verify(mockRequestBody).toJSON();
-        //verify(mockBandwidthClient).getUserId();
-        //verify(mockBandwidthClient).makeRequestMessageControllerPost(testBody, mockHttpClient, mockHttpPost);
-        //verify(mockBandwidthClient).
     }
 }

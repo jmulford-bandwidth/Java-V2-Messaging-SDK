@@ -15,6 +15,9 @@ import org.apache.http.HttpHeaders;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPatch;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 //Java packages
@@ -116,7 +119,18 @@ public class BandwidthClient {
         return new HttpGet(url);
     }
 
-    
+    public HttpPatch getHttpPatch(String url) {
+        return new HttpPatch(url);
+    }
+
+    public HttpPut getHttpPut(String url) {
+        return new HttpPut(url);
+    }
+
+    public HttpDelete getHttpDelete(String url) {
+        return new HttpDelete(url);
+    }
+
     /**
      * Parses an http response
      *
@@ -163,17 +177,58 @@ public class BandwidthClient {
     public String makeRequestApplicationControllerGet(String url) {
         return "";
     }
-
-    public String makeRequestApplicationControllerPost(String url, String body) {
-        return "";
-    }
-    public String makeRequestApplicationControllerPatch(String url, String body) {
-        return "";
-    }
-    public String makeRequestApplicationControllerPut(String url, String body) {
-        return "";
-    }
     public String makeRequestApplicationControllerDelete(String url) {
         return "";
+    }
+
+    /**
+     * Creates an HTTP Post request on a Bandwidth Application url
+     *
+     * @param entity StringEntity of the XML request body
+     * @param client HttpClient
+     * @param post HttpPost
+     */
+    public HttpResponse makeRequestApplicationControllerPost(StringEntity entity, HttpClient client, HttpPost post) throws IOException {
+        String encoding = Base64.getEncoder().encodeToString((this.username + ":" + this.password).getBytes("UTF-8"));
+
+        post.setHeader("Content-type", "application/xml");
+        post.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);
+        post.setEntity(entity);
+
+        return client.execute(post);
+    }
+
+    /**
+     * Creates an HTTP Patch request on a Bandwidth Application url
+     *
+     * @param entity StringEntity of the XML request body
+     * @param client HttpClient
+     * @param patch HttpPatch
+     */
+    public HttpResponse makeRequestApplicationControllerPatch(StringEntity entity, HttpClient client, HttpPatch patch) throws IOException {
+        String encoding = Base64.getEncoder().encodeToString((this.username + ":" + this.password).getBytes("UTF-8"));
+
+        patch.setHeader("Content-type", "application/xml");
+        patch.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);
+        patch.setEntity(entity);
+
+        return client.execute(patch);
+    }
+
+    /**
+     * Creates an HTTP Put request on a Bandwidth Application url
+     *
+     * @param entity StringEntity of the XML request body
+     * @param client HttpClient
+     * @param put HttpPut
+     */
+    public HttpResponse makeRequestApplicationControllerPut(StringEntity entity, HttpClient client, HttpPut put) throws IOException {
+        String encoding = Base64.getEncoder().encodeToString((this.username + ":" + this.password).getBytes("UTF-8"));
+
+        put.setHeader("Content-type", "application/xml");
+        put.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);
+        put.setEntity(entity);
+
+        return client.execute(put);
     }
 }
