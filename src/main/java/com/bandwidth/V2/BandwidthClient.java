@@ -135,7 +135,19 @@ public class BandwidthClient {
 		return result.toString();
     }
 
-    public String makeRequestAccountController(String url, String body, String method) {
+    public String makeRequestApplicationControllerGet(String url) {
+        return "";
+    }
+    public String makeRequestApplicationControllerPost(String url, String body) {
+        return "";
+    }
+    public String makeRequestApplicationControllerPatch(String url, String body) {
+        return "";
+    }
+    public String makeRequestApplicationControllerPut(String url, String body) {
+        return "";
+    }
+    public String makeRequestApplicationControllerDelete(String url) {
         return "";
     }
 }
