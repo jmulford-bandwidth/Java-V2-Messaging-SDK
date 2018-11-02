@@ -20,7 +20,7 @@ Java SDK for [Bandwidth's V2 Messaging Platform](https://dev.bandwidth.com/v2-me
 * [Bandwidth Developer Homepage](dev.bandwidth.com)
 
 
-Documentation can be found [here](http://www.javadoc.io/doc/com.bandwidth.sdk/bandwidth-v2-messaging/)
+Documentation for the SDK can be found [here](http://www.javadoc.io/doc/com.bandwidth.sdk/bandwidth-v2-messaging/)
 (Not yet live)
 
 The Java Bandwidth V2 Messaging SDK works in 3 parts:
