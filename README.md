@@ -14,7 +14,13 @@ Java SDK for [Bandwidth's V2 Messaging Platform](https://dev.bandwidth.com/v2-me
 
 ## Developer guide
 
-Documentation can be found [here](http://www.javadoc.io/doc/com.bandwidth.sdk/bandwidth-v2-messaging/)
+### Important links
+* [Bandwidth Dashboard](dashboard.bandwidth.com)
+* [Bandwidth Application](app.bandwidth.com)
+* [Bandwidth Developer Homepage](dev.bandwidth.com)
+
+
+Documentation for the SDK can be found [here](http://www.javadoc.io/doc/com.bandwidth.sdk/bandwidth-v2-messaging/)
 (Not yet live)
 
 The Java Bandwidth V2 Messaging SDK works in 3 parts:
@@ -57,12 +63,12 @@ import java.util.ArrayList;
 public class BandwidthV2Messaging() {
 
     public static void main(String[] args) {
-        String userId = "userId";
-        String apiToken = "apiToken";
-        String apiSecret = "apiSecret";
-        String username = "username";
-        String password = "password";
-        String account = "account";
+        static final String userId = "userId";
+        static final String apiToken = "apiToken";
+        static final String apiSecret = "apiSecret";
+        static final String username = "username";
+        static final String password = "password";
+        static final String account = "account";
 
         BandwidthClient client = new BandwidthClient(userId, apiToken, apiSecret,
                                                      username, password, account);
@@ -76,8 +82,8 @@ public class BandwidthV2Messaging() {
         String text = "Message content";
         String applicationId = "applicationId";
         ArrayList<String> media = new ArrayList<String>();
-        media.add("testurl.png");
-        String tag = "custom tag";
+        media.add("example.com/testurl.png");
+        String tag = "{\"next-step\":\"await-response\"}";
 
         SendMessageRequestBody body = new SendMessageRequestBody(to, from, text,
                                                                  applicationId, media,
@@ -94,8 +100,8 @@ public class BandwidthV2Messaging() {
         String text = "Message content";
         String applicationId = "applicationId";
         ArrayList<String> media = new ArrayList<String>();
-        media.add("testurl.png");
-        String tag = "custom tag";
+        media.add("example.com/testurl.png");
+        String tag = "{\"next-step\":\"await-response\"}";
 
         SendMessageRequestBody body = new SendMessageRequestBody(to, from, text,
                                                                  applicationId, media,
