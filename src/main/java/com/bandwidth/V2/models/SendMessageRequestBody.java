@@ -15,8 +15,8 @@ import java.util.ArrayList;
 @JsonInclude(Include.NON_NULL)
 public class SendMessageRequestBody {
 
-    public String from;
     public ArrayList<String> to;
+    public String from;
     public String text;
     public String applicationId;
     public ArrayList<String> media;
@@ -32,9 +32,9 @@ public class SendMessageRequestBody {
      * @param media Included media to send
      * @param tag Custom user tag to include in the callback
      */
-    public SendMessageRequestBody(String from, ArrayList<String> to, String text, String applicationId, ArrayList<String> media, String tag) {
-       this.from = from;
+    public SendMessageRequestBody(ArrayList<String> to, String from, String text, String applicationId, ArrayList<String> media, String tag) {
        this.to = to;
+       this.from = from;
        this.text = text;
        this.applicationId = applicationId;
        this.media = media;
