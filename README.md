@@ -4,12 +4,12 @@ Java SDK for [Bandwidth's V2 Messaging Platform](https://dev.bandwidth.com/v2-me
 
 ## pom.xml entry
 
-```
-    <dependency>
-        <groupId>com.bandwidth.sdk</groupId>
-        <artifactId>bandwidth-v2-messaging</artifactId>
-        <version><<<current-version>>></version>
-    </dependency>
+```xml
+<dependency>
+    <groupId>com.bandwidth.sdk</groupId>
+    <artifactId>bandwidth-v2-messaging</artifactId>
+    <version><<<current-version>>></version>
+</dependency>
 ```
 
 ## Developer guide
@@ -17,18 +17,21 @@ Java SDK for [Bandwidth's V2 Messaging Platform](https://dev.bandwidth.com/v2-me
 Documentation can be found [here](http://www.javadoc.io/doc/com.bandwidth.sdk/bandwidth-v2-messaging/)
 (Not yet live)
 
-The Java Bandwidth V2 Messaging SDK works in 3 parts
+The Java Bandwidth V2 Messaging SDK works in 3 parts:
 * BandwidthClient
 * Model objects
 * Controller objects
 
 The BandwidthClient object holds your HTTP credentials. There are 6 values held by this object
-* userId: Your userId (not your username) from app.bandwidth.com
-* apiToken: Your API token from app.bandwidth.com
-* apiSecret: Your API secret from app.bandwidth.com
-* username: Your username used to login to dashboard.bandwidth.com
-* password: Your password used to login to dashboard.bandwidth.com
-* account: Your account number from dashboard.bandwidth.com
+
+| Variable    | Description                                            | example        |
+|:------------|:-------------------------------------------------------|:---------------|
+| `userId`    | Your userId (not your username) from app.bandwidth.com | `u-abc123`     |
+| `apiToken`  | Your API token from app.bandwidth.com                  | `t-abc123`     |
+| `apiSecret` | Your API secret from app.bandwidth.com                 | `asdf123`      |
+| `username`  | Your username used to login to dashboard.bandwidth.com | `yourUserName` |
+| `password`  | Your password used to login to dashboard.bandwidth.com | `yourP@ssw0rd` |
+| `account`   | Your account number from dashboard.bandwidth.com       | `992299`       |
 
 BandwidthClient objects are responsible for making HTTP requests on Bandwidth's API endpoints, and for setting up proper authentication headers.
 
@@ -44,7 +47,7 @@ Controller objects are used to set up requests on Bandwidth's API, and use the B
 
 Below is a code sample showing how these objects interact
 
-```
+```java
 import com.bandwidth.V2.BandwidthClient;
 import com.bandwidth.V2.models.*;
 import com.bandwidth.V2.controllers.*;
@@ -80,7 +83,7 @@ public class BandwidthV2Messaging() {
                                                                  applicationId, media,
                                                                  tag);
         controller.sendMessage(body);
-        
+
         //Send a group text message
         ArrayList<String> to = new ArrayList<String>();
         to.add("+18887776666");
