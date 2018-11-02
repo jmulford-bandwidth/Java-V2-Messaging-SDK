@@ -30,7 +30,13 @@ public class CompleteUpdateApplicationRequestBodyTest {
         String expectedXML = "<Application><ServiceType>s</ServiceType><AppName>a</AppName><CallbackUrl>url</CallbackUrl><CallbackCreds><UserId>user</UserId><Password>pass</Password></CallbackCreds></Application>";
 
         //Create CompleteUpdateApplicationRequestBody and call toXML()
-        CompleteUpdateApplicationRequestBody requestBody = new CompleteUpdateApplicationRequestBody(serviceType, appName, callbackUrl, callbackUsername, callbackPassword);
+        CompleteUpdateApplicationRequestBody requestBody = new CompleteUpdateApplicationRequestBody.Builder()
+            .serviceType(serviceType)
+            .appName(appName)
+            .callbackUrl(callbackUrl)
+            .callbackUsername(callbackUsername)
+            .callbackPassword(callbackPassword)
+            .build();
         String xml = requestBody.toXML();
 
         //Check for correct value returned
