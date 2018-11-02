@@ -30,7 +30,13 @@ public class PartialUpdateApplicationRequestBodyTest {
         String expectedXML = "<Application><ServiceType>s</ServiceType><AppName>a</AppName><CallbackUrl>url</CallbackUrl><CallbackCreds><UserId>user</UserId><Password>pass</Password></CallbackCreds></Application>";
 
         //Create PartialUpdateApplicationRequestBody and call toXML()
-        PartialUpdateApplicationRequestBody requestBody = new PartialUpdateApplicationRequestBody(serviceType, appName, callbackUrl, callbackUsername, callbackPassword);
+        PartialUpdateApplicationRequestBody requestBody = ImmutablePartialUpdateApplicationRequestBody.builder()
+            .serviceType(serviceType)
+            .appName(appName)
+            .callbackUrl(callbackUrl)
+            .callbackUsername(callbackUsername)
+            .callbackPassword(callbackPassword)
+            .build();
         String xml = requestBody.toXML();
 
         //Check for correct value returned
@@ -44,7 +50,7 @@ public class PartialUpdateApplicationRequestBodyTest {
     public void testToXMLNullValues() {
         String expectedXML = "<Application></Application>";
 
-        PartialUpdateApplicationRequestBody requestBody = new PartialUpdateApplicationRequestBody(null, null, null, null, null);
+        PartialUpdateApplicationRequestBody requestBody = ImmutablePartialUpdateApplicationRequestBody.builder().build();
         String xml = requestBody.toXML();
 
         assertTrue(xml.equals(expectedXML));

@@ -30,7 +30,7 @@ public class CompleteUpdateApplicationRequestBodyTest {
         String expectedXML = "<Application><ServiceType>s</ServiceType><AppName>a</AppName><CallbackUrl>url</CallbackUrl><CallbackCreds><UserId>user</UserId><Password>pass</Password></CallbackCreds></Application>";
 
         //Create CompleteUpdateApplicationRequestBody and call toXML()
-        CompleteUpdateApplicationRequestBody requestBody = new CompleteUpdateApplicationRequestBody.Builder()
+        CompleteUpdateApplicationRequestBody requestBody = ImmutableCompleteUpdateApplicationRequestBody.builder()
             .serviceType(serviceType)
             .appName(appName)
             .callbackUrl(callbackUrl)
@@ -48,9 +48,17 @@ public class CompleteUpdateApplicationRequestBodyTest {
      */
     @Test
     public void testToXMLNullValues() {
-        String expectedXML = "<Application></Application>";
+        String serviceType = "s";
+        String appName = "a";
+        String callbackUrl = "url";
 
-        CompleteUpdateApplicationRequestBody requestBody = new CompleteUpdateApplicationRequestBody(null, null, null, null, null);
+        String expectedXML = "<Application><ServiceType>s</ServiceType><AppName>a</AppName><CallbackUrl>url</CallbackUrl></Application>";
+
+        CompleteUpdateApplicationRequestBody requestBody = ImmutableCompleteUpdateApplicationRequestBody.builder()
+            .serviceType(serviceType)
+            .appName(appName)
+            .callbackUrl(callbackUrl)
+            .build();
         String xml = requestBody.toXML();
 
         assertTrue(xml.equals(expectedXML));

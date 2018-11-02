@@ -114,11 +114,13 @@ public class BandwidthV2Messaging() {
         String callbackUsername = "yourUrl username";
         String callbackPassword = "yourUrl password";
 
-        CreateApplicationRequestBody body = new CreateApplicationRequestBody(serviceType,
-                                                                             appName,
-                                                                             callbackUrl,
-                                                                             callbackUsername,
-                                                                             callbackPassword);
+        CreateApplicationRequestBody body = ImmutableCreateApplicationRequestBody.builder()
+            .serviceType(serviceType)
+            .appName(appName)
+            .callbackUrl(callbackUrl)
+            .callbackUsername(callbackUsername)
+            .callbackPassword(callbackPassword)
+            .build();
         applicationController.createApplication(body);
 
         //Get an application
@@ -138,11 +140,9 @@ public class BandwidthV2Messaging() {
         String applicationId = "applicationId";
         String newAppName = "New App Name";
 
-        PartialUpdateApplicationRequestBody = new PartialUpdateApplicationRequestBody(null, 
-                                                                                      newAppName,
-                                                                                      null,
-                                                                                      null,
-                                                                                      null);
+        PartialUpdateApplicationRequestBody = ImmutablePartialUpdateApplicationRequestBody.builder()
+            .appName(newAppName)
+            .build();
         applicationController.partialUpdateApplication(body, applicationId);
 
         //Completely update an application
@@ -153,11 +153,14 @@ public class BandwidthV2Messaging() {
         String newCallbackPassword = "newYourUrl password";
         String applicationId = "applicationId";
 
-        CompleteUpdateApplicationRequestBody = new CompleteUpdateApplicationRequestBody(newServiceType,
-                                                                                        newAppName,
-                                                                                        newCallbackUrl,
-                                                                                        newCallbackUsername,
-                                                                                        newCallbackPassword);
+        CompleteUpdateApplicationRequestBody body = ImmutableCompleteUpdateApplicationRequestBody.builder()
+            .serviceType(newServiceType)
+            .appName(newAppName)
+            .callbackUrl(newCallbackUrl)
+            .callbackUsername(newCallbackUsername)
+            .callbackPassword(newCallbackPassword)
+            .build();
+
         applicationController.completeUpdateApplication(body, applicationId);
 
         //Get an application's SIP Peers

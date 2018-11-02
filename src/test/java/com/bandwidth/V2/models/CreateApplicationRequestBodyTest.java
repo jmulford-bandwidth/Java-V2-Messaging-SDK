@@ -30,7 +30,13 @@ public class CreateApplicationRequestBodyTest {
         String expectedXML = "<Application><ServiceType>s</ServiceType><AppName>a</AppName><CallbackUrl>url</CallbackUrl><CallbackCreds><UserId>user</UserId><Password>pass</Password></CallbackCreds></Application>";
 
         //Create CreateApplicationRequestBody and call toXML()
-        CreateApplicationRequestBody requestBody = new CreateApplicationRequestBody(serviceType, appName, callbackUrl, callbackUsername, callbackPassword);
+        CreateApplicationRequestBody requestBody = ImmutableCreateApplicationRequestBody.builder()
+            .serviceType(serviceType)
+            .appName(appName)
+            .callbackUrl(callbackUrl)
+            .callbackUsername(callbackUsername)
+            .callbackPassword(callbackPassword)
+            .build();
         String xml = requestBody.toXML();
 
         //Check for correct value returned
@@ -42,9 +48,17 @@ public class CreateApplicationRequestBodyTest {
      */
     @Test
     public void testToXMLNullValues() {
-        String expectedXML = "<Application></Application>";
+        String serviceType = "s";
+        String appName = "a";
+        String callbackUrl = "url";
 
-        CreateApplicationRequestBody requestBody = new CreateApplicationRequestBody(null, null, null, null, null);
+        String expectedXML = "<Application><ServiceType>s</ServiceType><AppName>a</AppName><CallbackUrl>url</CallbackUrl></Application>";
+
+        CreateApplicationRequestBody requestBody = ImmutableCreateApplicationRequestBody.builder()
+            .serviceType(serviceType)
+            .appName(appName)
+            .callbackUrl(callbackUrl)
+            .build();
         String xml = requestBody.toXML();
 
         assertTrue(xml.equals(expectedXML));

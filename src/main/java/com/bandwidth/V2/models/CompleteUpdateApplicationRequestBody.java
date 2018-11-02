@@ -2,6 +2,8 @@ package com.bandwidth.V2.models;
 
 import org.immutables.value.Value;
 
+import java.util.Optional;
+
 /**
  * Wrapper class for holding request parameters for ApplicationController.completeUpdateApplication()
  */
@@ -11,8 +13,8 @@ public abstract class CompleteUpdateApplicationRequestBody {
     public abstract String serviceType();
     public abstract String appName();
     public abstract String callbackUrl();
-    public abstract String callbackUsername();
-    public abstract String callbackPassword();
+    public abstract Optional<String> callbackUsername();
+    public abstract Optional<String> callbackPassword();
 
     /**
      * Returns a XML representation of the class
@@ -21,19 +23,19 @@ public abstract class CompleteUpdateApplicationRequestBody {
      */
     public String toXML() {
         String xml = "<Application>";
-        if (this.serviceType != null && this.serviceType.length() > 0) {
-            xml += "<ServiceType>" + this.serviceType + "</ServiceType>";
+        if (this.serviceType() != null && this.serviceType().length() > 0) {
+            xml += "<ServiceType>" + this.serviceType() + "</ServiceType>";
         }
-        if (this.appName != null && this.appName.length() > 0) {
-            xml += "<AppName>" + this.appName + "</AppName>";
+        if (this.appName() != null && this.appName().length() > 0) {
+            xml += "<AppName>" + this.appName() + "</AppName>";
         }
-        if (this.callbackUrl != null && this.callbackUrl.length() > 0) {
-            xml += "<CallbackUrl>" + this.callbackUrl + "</CallbackUrl>";
+        if (this.callbackUrl() != null && this.callbackUrl().length() > 0) {
+            xml += "<CallbackUrl>" + this.callbackUrl() + "</CallbackUrl>";
         }
-        if (this.callbackUsername != null && this.callbackUsername.length() > 0 && this.callbackPassword != null && this.callbackPassword.length() > 0) {
+        if (this.callbackUsername().isPresent() && this.callbackPassword().isPresent()) {
             xml += "<CallbackCreds>";
-            xml += "<UserId>" + this.callbackUsername + "</UserId>";
-            xml += "<Password>" + this.callbackPassword + "</Password>";
+            xml += "<UserId>" + this.callbackUsername().get() + "</UserId>";
+            xml += "<Password>" + this.callbackPassword().get() + "</Password>";
             xml += "</CallbackCreds>";
         }
 
@@ -42,3 +44,4 @@ public abstract class CompleteUpdateApplicationRequestBody {
         return xml;
     }
 }
+

@@ -1,32 +1,20 @@
 package com.bandwidth.V2.models;
 
+import org.immutables.value.Value;
+
+import java.util.Optional;
+
 /**
  * Wrapper class for holding request parameters for ApplicationController.createApplication()
  */
-public class CreateApplicationRequestBody {
+@Value.Immutable
+public abstract class CreateApplicationRequestBody {
 
-    private String serviceType;
-    private String appName;
-    private String callbackUrl;
-    private String callbackUsername;
-    private String callbackPassword;
-
-    /**
-     * Constructor for CreateApplicationRequestBody
-     *
-     * @param serviceType The service type of the application
-     * @param appName The name of the application
-     * @param callbackUrl The callback url for the application
-     * @param callbackUsername Basic auth username for the callback url
-     * @param callbackPassword Basic auth password for the callback url
-     */
-    public CreateApplicationRequestBody(String serviceType, String appName, String callbackUrl, String callbackUsername, String callbackPassword) {
-        this.serviceType = serviceType;
-        this.appName = appName;
-        this.callbackUrl = callbackUrl;
-        this.callbackUsername = callbackUsername;
-        this.callbackPassword = callbackPassword;
-    }
+    public abstract String serviceType();
+    public abstract String appName();
+    public abstract String callbackUrl();
+    public abstract Optional<String> callbackUsername();
+    public abstract Optional<String> callbackPassword();
 
     /**
      * Returns a XML representation of the class
@@ -35,19 +23,19 @@ public class CreateApplicationRequestBody {
      */
     public String toXML() {
         String xml = "<Application>";
-        if (this.serviceType != null && this.serviceType.length() > 0) {
-            xml += "<ServiceType>" + this.serviceType + "</ServiceType>";
+        if (this.serviceType() != null && this.serviceType().length() > 0) {
+            xml += "<ServiceType>" + this.serviceType() + "</ServiceType>";
         }
-        if (this.appName != null && this.appName.length() > 0) {
-            xml += "<AppName>" + this.appName + "</AppName>";
+        if (this.appName() != null && this.appName().length() > 0) {
+            xml += "<AppName>" + this.appName() + "</AppName>";
         }
-        if (this.callbackUrl != null && this.callbackUrl.length() > 0) {
-            xml += "<CallbackUrl>" + this.callbackUrl + "</CallbackUrl>";
+        if (this.callbackUrl() != null && this.callbackUrl().length() > 0) {
+            xml += "<CallbackUrl>" + this.callbackUrl() + "</CallbackUrl>";
         }
-        if (this.callbackUsername != null && this.callbackUsername.length() > 0 && this.callbackPassword != null && this.callbackPassword.length() > 0) {
+        if (this.callbackUsername().isPresent() && this.callbackPassword().isPresent()) {
             xml += "<CallbackCreds>";
-            xml += "<UserId>" + this.callbackUsername + "</UserId>";
-            xml += "<Password>" + this.callbackPassword + "</Password>";
+            xml += "<UserId>" + this.callbackUsername().get() + "</UserId>";
+            xml += "<Password>" + this.callbackPassword().get() + "</Password>";
             xml += "</CallbackCreds>";
         }
 
