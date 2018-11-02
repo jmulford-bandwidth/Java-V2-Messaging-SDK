@@ -25,8 +25,8 @@ public class SendMessageRequestBody {
     /**
      * Constructor for SendMessageRequestBody
      *
-     * @param from The Bandwidth number sending the message
      * @param to Recipient(s) of the message
+     * @param from The Bandwidth number sending the message
      * @param text The text contents of the message
      * @param applicationId The application in the Bandwidth Dashbard using this number
      * @param media Included media to send
@@ -40,6 +40,27 @@ public class SendMessageRequestBody {
        this.media = media;
        this.tag = tag; 
     }
+
+    /**
+     * Constructor for SendMessageRequestBody for 1 recipient 
+     *
+     * @param to Recipient of the message
+     * @param from The Bandwidth number sending the message
+     * @param text The text contents of the message
+     * @param applicationId The application in the Bandwidth Dashbard using this number
+     * @param media Included media to send
+     * @param tag Custom user tag to include in the callback
+     */
+    public SendMessageRequestBody(String to, String from, String text, String applicationId, ArrayList<String> media, String tag) {
+       this.to = new ArrayList<String>();
+       this.to.add(to);
+       this.from = from;
+       this.text = text;
+       this.applicationId = applicationId;
+       this.media = media;
+       this.tag = tag; 
+    }
+
 
     /**
      * Returns a JSON representation of the class

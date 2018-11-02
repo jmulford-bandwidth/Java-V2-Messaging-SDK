@@ -76,8 +76,7 @@ public class BandwidthV2Messaging() {
         ApplicationController applicationController = new ApplicationController(client);
 
         //Send a single text message
-        ArrayList<String> to = new ArrayList<String>();
-        to.add("+18887776666");
+        String to = "+18887776666";
         String from = "+13334445555"; //Bandwidth phone number
         String text = "Message content";
         String applicationId = "applicationId";
