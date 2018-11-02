@@ -14,6 +14,9 @@ Java SDK for [Bandwidth's V2 Messaging Platform](https://dev.bandwidth.com/v2-me
 
 ## Developer guide
 
+Documentation can be found [here](http://www.javadoc.io/doc/com.bandwidth.sdk/bandwidth-v2-messaging/)
+(Not yet live)
+
 The Java Bandwidth V2 Messaging SDK works in 3 parts
 * BandwidthClient
 * Model objects
