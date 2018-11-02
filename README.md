@@ -29,11 +29,15 @@ The BandwidthClient object holds your HTTP credentials. There are 6 values held 
 
 BandwidthClient objects are responsible for making HTTP requests on Bandwidth's API endpoints, and for setting up proper authentication headers.
 
+<br>
 
 Model objects are used to store request body parameters. Model objects contain functions that convert themselves to JSON or XML, depending on the API endpoint used with the model.
 
+<br>
 
-Controller objects are used to execute requests on Bandwidth's API. If the request requires a request body, a model object is required as a parameter to a controller's function.
+Controller objects are used to set up requests on Bandwidth's API, and use the BandwidthClient to execute these requests. If the request requires a request body, a model object is required as a parameter to a controller's function.
+
+<br>
 
 Below is a code sample showing how these objects interact
 
