@@ -14,7 +14,7 @@ Java SDK for [Bandwidth's V2 Messaging Platform](https://dev.bandwidth.com/v2-me
 
 ## Developer guide
 
-This SDK works in 3 parts
+The Java Bandwidth V2 Messaging SDK works in 3 parts
 * BandwidthClient
 * Model objects
 * Controller objects
@@ -26,11 +26,14 @@ The BandwidthClient object holds your HTTP credentials. There are 6 values held 
 * username: Your username used to login to dashboard.bandwidth.com
 * password: Your password used to login to dashboard.bandwidth.com
 * account: Your account number from dashboard.bandwidth.com
+
 BandwidthClient objects are responsible for making HTTP requests on Bandwidth's API endpoints, and for setting up proper authentication headers.
 
-Model objects are used to store request body parameters. Model objects contain functions that convert themselves to JSON or XML, depending on the function.
 
-Controller objects are used to execute requests on Bandwidth's API. If the request required a request body, a model object is required as a parameter to a controller's function.
+Model objects are used to store request body parameters. Model objects contain functions that convert themselves to JSON or XML, depending on the API endpoint used with the model.
+
+
+Controller objects are used to execute requests on Bandwidth's API. If the request requires a request body, a model object is required as a parameter to a controller's function.
 
 Below is a code sample showing how these objects interact
 
@@ -51,7 +54,8 @@ public class BandwidthV2Messaging() {
         String password = "password";
         String account = "account";
 
-        BandwidthClient client = new BandwidthClient(userId, apiToken, apiSecret, username, password, account);
+        BandwidthClient client = new BandwidthClient(userId, apiToken, apiSecret,
+                                                     username, password, account);
         MessageController messageController = new MessageController(client);
         ApplicationController applicationController = new ApplicationController(client);
 
@@ -65,7 +69,9 @@ public class BandwidthV2Messaging() {
         media.add("testurl.png");
         String tag = "custom tag";
 
-        SendMessageRequestBody body = new SendMessageRequestBody(to, from, text, applicationId, media, tag);
+        SendMessageRequestBody body = new SendMessageRequestBody(to, from, text,
+                                                                 applicationId, media,
+                                                                 tag);
         controller.sendMessage(body);
         
         //Send a group text message
@@ -81,7 +87,9 @@ public class BandwidthV2Messaging() {
         media.add("testurl.png");
         String tag = "custom tag";
 
-        SendMessageRequestBody body = new SendMessageRequestBody(to, from, text, applicationId, media, tag);
+        SendMessageRequestBody body = new SendMessageRequestBody(to, from, text,
+                                                                 applicationId, media,
+                                                                 tag);
         messageController.sendMessage(body);
 
         //Create an application
@@ -91,7 +99,11 @@ public class BandwidthV2Messaging() {
         String callbackUsername = "yourUrl username";
         String callbackPassword = "yourUrl password";
 
-        CreateApplicationRequestBody body = new CreateApplicationRequestBody(serviceType, appName, callbackUrl, callbackUsername, callbackPassword);
+        CreateApplicationRequestBody body = new CreateApplicationRequestBody(serviceType,
+                                                                             appName,
+                                                                             callbackUrl,
+                                                                             callbackUsername,
+                                                                             callbackPassword);
         applicationController.createApplication(body);
 
         //Get an application
@@ -111,7 +123,11 @@ public class BandwidthV2Messaging() {
         String applicationId = "applicationId";
         String newAppName = "New App Name";
 
-        PartialUpdateApplicationRequestBody = new PartialUpdateApplicationRequestBody(null, newAppName, null, null, null);
+        PartialUpdateApplicationRequestBody = new PartialUpdateApplicationRequestBody(null, 
+                                                                                      newAppName,
+                                                                                      null,
+                                                                                      null,
+                                                                                      null);
         applicationController.partialUpdateApplication(body, applicationId);
 
         //Completely update an application
@@ -122,7 +138,11 @@ public class BandwidthV2Messaging() {
         String newCallbackPassword = "newYourUrl password";
         String applicationId = "applicationId";
 
-        CompleteUpdateApplicationRequestBody = new CompleteUpdateApplicationRequestBody(newServiceType, newAppName, newCallbackUrl, newCallbackUsername, newCallbackPassword);
+        CompleteUpdateApplicationRequestBody = new CompleteUpdateApplicationRequestBody(newServiceType,
+                                                                                        newAppName,
+                                                                                        newCallbackUrl,
+                                                                                        newCallbackUsername,
+                                                                                        newCallbackPassword);
         applicationController.completeUpdateApplication(body, applicationId);
 
         //Get an application's SIP Peers
@@ -130,6 +150,5 @@ public class BandwidthV2Messaging() {
 
         applicationController.getApplicationSipPeers(applicationId);
     }
-
 }
 ```
