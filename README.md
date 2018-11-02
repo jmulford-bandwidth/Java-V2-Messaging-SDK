@@ -14,7 +14,7 @@ Java SDK for [Bandwidth's V2 Messaging Platform](https://dev.bandwidth.com/v2-me
 
 ## Developer guide
 
-###Important links
+### Important links
 * [Bandwidth Dashboard](dashboard.bandwidth.com)
 * [Bandwidth Application](app.bandwidth.com)
 * [Bandwidth Developer Homepage](dev.bandwidth.com)
