@@ -35,7 +35,7 @@ Model objects are used to store request body parameters. Model objects contain f
 
 <br>
 
-Controller objects are used to set up requests on Bandwidth's API, and use the BandwidthClient to execute these requests. If the request requires a request body, a model object is required as a parameter to a controller's function.
+Controller objects are used to set up requests on Bandwidth's API, and use the BandwidthClient to execute these requests. If the request requires a request body, the corresponding controller function will require a model object as a parameter.
 
 <br>
 
